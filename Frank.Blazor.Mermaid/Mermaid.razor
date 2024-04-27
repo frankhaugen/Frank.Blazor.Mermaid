@@ -1,10 +1,21 @@
 ﻿@using Microsoft.JSInterop
-@inject MermaidInterop MermaidInterop
+@using Blazorade.Mermaid.Components
 @inject IJSRuntime JsRuntime
 
-<pre id="@ElementId" class="mermaid">
-    @ChildContent
-</pre>
+@if (!string.IsNullOrEmpty(Content))
+{
+    <div id="@ElementId" style="display:none;">
+        @ChildContent
+    </div>
+
+    <MermaidDiagram Definition="@Content" />
+}
+else
+{
+    <div id="@ElementId">
+        @ChildContent
+    </div>
+}
 
 @code {
     private string ElementId { get; } = $"mermaid-{Guid.NewGuid()}";
@@ -12,13 +23,14 @@
     [Parameter]
     public RenderFragment ChildContent { get; set; } = default!;
 
+    private string Content { get; set; } = string.Empty;
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
-            await MermaidInterop.Initialize();
-        }   
-        var content = await JsRuntime.InvokeAsync<string>("eval", $"document.getElementById('{ElementId}').innerHTML");
-        await MermaidInterop.Render(ElementId, content);
+            Content = await JsRuntime.InvokeAsync<string>("eval", $"document.getElementById('{ElementId}').textContent");
+            StateHasChanged(); // Call this to signal Blazor to re-check the render state
+        }
     }
 }

@@ -1,9 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Razor">
 
     <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
-        <Nullable>enable</Nullable>
-        <ImplicitUsings>enable</ImplicitUsings>
+        <Description>Wrapper for Blazorade Mermaid</Description>
     </PropertyGroup>
     
     <ItemGroup>
@@ -11,11 +9,12 @@
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Include="Blazorade.Mermaid" Version="1.1.1" />
         <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.4"/>
     </ItemGroup>
 
     <ItemGroup>
-      <None Include="wwwroot\mermaidInterop.js" />
+      <Folder Include="wwwroot\" />
     </ItemGroup>
 
 </Project>

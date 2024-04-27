@@ -1,8 +1,10 @@
 # Frank.Blazor.Mermaid
 
-This is a Blazor component that renders Mermaid diagrams. It is based on the [mermaid](https://mermaid-js.github.
-io/mermaid/#/) library. The component is written in C# and uses the `IJSRuntime` to call the JavaScript functions of the 
-mermaid library. The component is a Razor class library and can be used in any Blazor project.
+This is a Blazor component that renders Mermaid diagrams. It is wrapper around the Blazorade.Mermaid library, which is a 
+Blazor wrapper around the MermaidJS library.
+
+This just exists because I wanted to use Mermaid diagrams in my Blazor projects, and I wanted to make the mermaid diagrams 
+in between tags, and not in a separate property and then bind that property to the component.
 
 ## Installation
 
@@ -20,24 +22,31 @@ Add the following using statement to your _Imports.razor:
 @using Frank.Blazor.Mermaid
 ```
 
-Add the following script tag to your index.html or _Host.cshtml:
-
-```html
-<script src="_content/Frank.Blazor.Mermaid/mermaid.min.js"></script>
-```
-
 Add the following tag to your component:
 
 ```html
-<Mermaid Diagram="@_diagram" />
+<Mermaid>
+    @_diagram
+</Mermaid
 ```
-
-Add the following code to your component:
 
 ```csharp
 @code {
     private string _diagram = "graph TD\nA[Christmas] -->|Get money| B(Go shopping)\nB --> C{Let me think}\nC -->|One| D[Laptop]\nC -->|Two| E[iPhone]\nC -->|Three| F[fa:fa-car Car]\n";
 }
+```
+
+or if you want write the diagram directly in the tag:
+
+```html
+<Mermaid>
+    graph TD
+    A[Christmas] -->|Get money| B(Go shopping)
+    B --> C{Let me think}
+    C -->|One| D[Laptop]
+    C -->|Two| E[iPhone]
+    C -->|Three| F[fa:fa-car Car]
+</Mermaid
 ```
 
 ## License
