@@ -1,0 +1,24 @@
+﻿@using Microsoft.JSInterop
+@inject MermaidInterop MermaidInterop
+@inject IJSRuntime JsRuntime
+
+<pre id="@ElementId" class="mermaid">
+    @ChildContent
+</pre>
+
+@code {
+    private string ElementId { get; } = $"mermaid-{Guid.NewGuid()}";
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; } = default!;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await MermaidInterop.Initialize();
+        }   
+        var content = await JsRuntime.InvokeAsync<string>("eval", $"document.getElementById('{ElementId}').innerHTML");
+        await MermaidInterop.Render(ElementId, content);
+    }
+}
