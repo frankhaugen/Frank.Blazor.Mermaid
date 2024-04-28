@@ -2,6 +2,7 @@
 
     <PropertyGroup>
         <IsPackable>false</IsPackable>
+        <Description>Blazor Mermaid component</Description>
     </PropertyGroup>
 
     <ItemGroup>
