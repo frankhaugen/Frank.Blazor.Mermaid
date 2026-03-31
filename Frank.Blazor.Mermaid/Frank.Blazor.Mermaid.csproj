@@ -10,6 +10,7 @@
 
     <ItemGroup>
         <PackageReference Include="Blazorade.Mermaid" Version="1.1.1" />
+        <PackageReference Include="Frank.Mermaid" Version="0.2.0" />
         <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.4"/>
     </ItemGroup>
 
